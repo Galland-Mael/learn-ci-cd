@@ -6,6 +6,10 @@ import { TypedRouter } from './helpers/typed-router'
 
 const prisma = usePrisma()
 
+export function isValidPassword(password: string) {
+    return password.length >= 8 && password.match(/[0-9]/) !== null
+}
+
 const typedRouter = new TypedRouter()
     .route(
         new (class AuthRegisterRoute implements TypedRouteInterface {
@@ -26,8 +30,7 @@ const typedRouter = new TypedRouter()
                     if (typeof email !== 'string') throw new Error('')
                     if (typeof password !== 'string') throw new Error('')
 
-                    // Vérifier la longueur du password
-                    if (password.length < 8) {
+                    if (!isValidPassword(password)) {
                         return error(400, 'Too short password')
                     }
 
