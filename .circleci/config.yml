@@ -59,7 +59,6 @@ jobs:
       - run:
           name: "Semantic release"
           command: "npx semantic-release"
-          working_directory: /
   
 workflows:
   version: 2
