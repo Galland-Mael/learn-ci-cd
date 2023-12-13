@@ -1,0 +1,78 @@
+version: 2.1
+
+jobs:
+  backend-lint:
+    docker:
+      - image: node:lts
+    steps:
+      - checkout
+      - run:
+          name: "Install dependencies"
+          command: "npm install"
+      - run:
+          name: "Backend lint"
+          command: "npm run lint-check"
+          working_directory: backend/
+
+  backend-type-check:
+    docker:
+      - image: node:lts
+    steps:
+      - checkout
+      - run:
+          name: "Install dependencies"
+          command: "npm install"
+      - run:
+          name: "Install database dependencies"
+          command: "npm run db-install"
+          working_directory: backend/
+      - run:
+          name: "Type check"
+          command: "npm run type-check"
+          working_directory: backend/
+
+  backend-unit-tests:
+    docker:
+      - image: node:lts
+    steps:
+      - checkout
+      - run:
+          name: "Install dependencies"
+          command: "npm install"
+      - run:
+          name: "Install database dependencies"
+          command: "npm run db-install"
+          working_directory: backend/
+      - run:
+          name: "Unit tests"
+          command: "npm run unit-tests"
+          working_directory: backend/
+
+  semantic-release:
+    docker:
+      - image: node:lts
+    steps:
+      - checkout
+      - run:
+          name: "Install dependencies"
+          command: "npm install"
+      - run:
+          name: "Semantic release"
+          command: "npm run semantic-release"
+  
+workflows:
+  version: 2
+  backend-ci-workflow:
+    jobs:
+      - backend-lint
+      - backend-type-check
+      - backend-unit-tests
+
+  backend-cd-workflow:
+    jobs:
+      - backend-lint
+      - backend-type-check
+      - backend-unit-tests
+      - semantic-release:
+          requires:
+            - backend-unit-tests
