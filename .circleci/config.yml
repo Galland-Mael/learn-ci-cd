@@ -66,15 +66,15 @@ jobs:
     steps:
       - checkout
       - run:
-        command: |
+          command: |
             npm install
             npm run build
-        working_directory: backend/
+          working_directory: backend/
       - run:
-        command: |
+          command: |
             npm install
             npm run build
-        working_director: frontend/
+          working_director: frontend/
 
 
 workflows:
