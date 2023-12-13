@@ -25,7 +25,7 @@ jobs:
     docker:
       -image: node:lts
     steps:
-      - chekout
+      - checkout
       - run:
           command: "npm install"
       - run:
