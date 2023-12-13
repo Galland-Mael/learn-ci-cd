@@ -15,8 +15,10 @@ jobs:
     steps:
       - checkout
       - run:
+          shell: /bin/sh
           command: "npm install"
       - run:
+          shell: /bin/sh
           name: "Backend lint"
           command: "npm run lint-check"
           working_directory: ~/backend/
