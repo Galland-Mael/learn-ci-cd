@@ -25,13 +25,14 @@ jobs:
     docker:
       -image: node:lts
     steps:
+      - chekout
       - run:
-        command: "npm install"
+          command: "npm install"
       - run:
-        command: "npm run db-install"
-        working_directory: backend/
+          command: "npm run db-install"
+          working_directory: backend/
       - run:
-        command: "npm run type-check"
+          command: "npm run type-check"
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
