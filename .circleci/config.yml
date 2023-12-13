@@ -9,16 +9,14 @@ jobs:
     # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/configuration-reference/#executor-job
     docker:
-      - image: cimg/base:stable
+      - image: node:lts
     # Add steps to the job
     # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
       - checkout
       - run:
-          shell: /bin/sh
           command: "npm install"
       - run:
-          shell: /bin/sh
           name: "Backend lint"
           command: "npm run lint-check"
           working_directory: ~/backend/
