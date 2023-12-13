@@ -58,7 +58,7 @@ jobs:
           command: "npm install"
       - run:
           name: "Semantic release"
-          command: "npx semantic-release"
+          command: "npm run semantic-release"
   
 workflows:
   version: 2
