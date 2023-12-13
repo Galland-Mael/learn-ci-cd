@@ -60,6 +60,23 @@ jobs:
           name: "Semantic release"
           command: "npm run semantic-release"
   
+  build_and_deploy :
+    docker:
+      - image: node:lts
+    steps:
+      - checkout
+      - run:
+        - command: |
+            "npm install"
+            "npm run build"
+        - working_directory: backend/
+      - run:
+        - command: |
+            "npm install"
+            "npm run build"
+        - working_director: frontend/
+
+
 workflows:
   version: 2
   backend-ci-workflow:
@@ -76,3 +93,11 @@ workflows:
       - semantic-release:
           requires:
             - backend-unit-tests
+  
+  cd-workflow:
+    filters:
+      branches:
+        only:
+          - main
+    jobs:
+      - build_and_deploy 
