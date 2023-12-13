@@ -67,13 +67,13 @@ jobs:
       - checkout
       - run:
         - command: |
-            "npm install"
-            "npm run build"
+            npm install
+            npm run build
         - working_directory: backend/
       - run:
         - command: |
-            "npm install"
-            "npm run build"
+            npm install
+            npm run build
         - working_director: frontend/
 
 
