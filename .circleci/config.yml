@@ -29,6 +29,7 @@ jobs:
       - run:
           name: "Type check"
           command: "npm run type-check"
+          working_directory: backend/
 
 workflows:
   version: 2
