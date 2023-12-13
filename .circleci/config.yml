@@ -14,8 +14,26 @@ jobs:
           command: "npm run lint-check"
           working_directory: backend/
 
-  backend-type-check:
+  backend-unit-tests:
     docker:
+      - image: node:lts
+    steps:
+      - checkout
+      - run:
+          name: "Install dependencies"
+          command: "npm install"
+      - run:
+          name: "Install database dependencies"
+          command: "npm run db-install"
+          working_directory: backend/
+      - run:
+          name: "Type check"
+          command: "npm run unit-tests"
+          working_directory: backend/
+
+
+  backend-unit-tests:
+   docker:
       - image: node:lts
     steps:
       - checkout
@@ -37,3 +55,4 @@ workflows:
     jobs:
       - backend-lint
       - backend-type-check
+      - backend-unit-tests
