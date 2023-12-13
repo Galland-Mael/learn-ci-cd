@@ -33,7 +33,7 @@ jobs:
 
 
   backend-unit-tests:
-   docker:
+    docker:
       - image: node:lts
     steps:
       - checkout
