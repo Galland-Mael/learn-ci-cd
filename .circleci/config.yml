@@ -20,11 +20,11 @@ jobs:
           name: "Backend lint"
           command: "npm run lint-check"
           working_directory: backend/
+  
   backend-type-check:
     docker:
       -image: node:lts
     steps:
-      - chekout
       - run:
         command: "npm install"
       - run:
