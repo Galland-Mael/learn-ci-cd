@@ -48,6 +48,19 @@ jobs:
           command: "npm run unit-tests"
           working_directory: backend/
 
+  semantic-release:
+    docker:
+      - image: node:lts
+    steps:
+      - checkout
+      - run:
+          name: "Install dependencies"
+          command: "npm install"
+      - run:
+          name: "Semantic release"
+          command: "npx semantic-release"
+          working_directory: /
+  
 workflows:
   version: 2
   backend-ci-workflow:
@@ -55,3 +68,12 @@ workflows:
       - backend-lint
       - backend-type-check
       - backend-unit-tests
+
+  backend-cd-workflow:
+    jobs:
+      - backend-lint
+      - backend-type-check
+      - backend-unit-tests
+      - semantic-release:
+          requires:
+            - backend-unit-tests
